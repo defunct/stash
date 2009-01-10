@@ -1,40 +1,64 @@
-package com.goodworkalan.favorites;
+package com.goodworkalan.stash;
 
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Favorites
+public class Stash
 {
-    private final Map<Type, Object> map = new HashMap<Type, Object>();
+    private final Map<Key, Map<java.lang.reflect.Type, Object>> map = new HashMap<Key, Map<java.lang.reflect.Type, Object>>();
     
-    public <T> void put(Key<T> key, T value)
+    private <T> void put(Key flag, java.lang.reflect.Type key, T value)
     {
-        map.put(key.getType(), value);
+        Map<java.lang.reflect.Type, Object> favorites = map.get(flag);
+        if (favorites == null)
+        {
+            favorites = new HashMap<java.lang.reflect.Type, Object>();
+            map.put(flag, favorites);
+        }
+        favorites.put(key, value);
     }
     
-    public <T> void put(Class<T> key, T value)
+    public <T> void put(Key flag, Type<T> key, T value)
     {
-        map.put(key, value);
+        put(flag, key.getType(), value);
     }
     
-    @SuppressWarnings("unchecked")
-    public <T> T get(Key<T> key)
+    public <T> void put(Key flag, Class<T> key, T value)
     {
-        return (T) map.get(key.getType()); 
+        put(flag, (java.lang.reflect.Type) key, value);
     }
     
-    public <T> T get(Class<T> key)
+    private Object get(Key flag, java.lang.reflect.Type type)
     {
-        return key.cast(map.get(key));
+        Map<java.lang.reflect.Type, Object> favorites = map.get(flag);
+        if (favorites == null)
+        {
+            return null;
+        }
+        return favorites.get(type);
     }
 
-    public abstract static class Key<T>
+    @SuppressWarnings("unchecked")
+    public <T> T get(Key flag, Type<T> key)
     {
-        private final Type type;
+        return (T) get(flag, key.getType()); 
+    }
+    
+    public <T> T get(Key flag, Class<T> key)
+    {
+        return key.cast(get(flag, (java.lang.reflect.Type) key));
+    }
+    
+    public final static class Key
+    {
+    }
+
+    public abstract static class Type<T>
+    {
+        private final java.lang.reflect.Type type;
         
-        public Key()
+        public Type()
         {
             // Give me class information.  
             Class<?> klass = getClass();  
@@ -43,7 +67,7 @@ public class Favorites
             // main method. Hence, to get the TypeReference itself, I need superclass.  
             // Furthermore, to get Type information, you should call  
             // getGenericSuperclass() instead of getSuperclass().  
-            Type superClass = klass.getGenericSuperclass();  
+            java.lang.reflect.Type superClass = klass.getGenericSuperclass();  
            
             if (superClass instanceof Class)
             {  
@@ -77,7 +101,7 @@ public class Favorites
             type = pt.getActualTypeArguments()[0];  
         }
         
-        public Type getType()
+        public java.lang.reflect.Type getType()
         {
             return type;
         }
