@@ -26,6 +26,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.goodworkalan</groupId>
+            <artifactId>ilk</artifactId>
+            <version>0.1.X</version>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>5.8</version>
