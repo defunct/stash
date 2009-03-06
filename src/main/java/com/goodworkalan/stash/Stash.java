@@ -10,13 +10,11 @@ import com.goodworkalan.ilk.UncheckedCast;
  * A type-safe heterogeneous collection. 
  * 
  * @author Alan Gutierrez
- *
- * @param <K> The key type.
  */
-public class Stash<K>
+public class Stash
 {
     /** Map of keys to type mapped objects. */
-    private final Map<K, Map<Ilk.Key, Object>> map = new HashMap<K, Map<Ilk.Key, Object>>();
+    private final Map<Key, Map<Ilk.Key, Object>> map = new HashMap<Key, Map<Ilk.Key, Object>>();
 
     /**
      * Map the given value of the type given by the <code>Ilk.Key</code> to the
@@ -31,7 +29,7 @@ public class Stash<K>
      * @param value
      *            The value.
      */
-    private <T> void put(K key, Ilk.Key ilkKey, T value)
+    private <T> void put(Key key, Ilk.Key ilkKey, T value)
     {
         Map<Ilk.Key, Object> favorites = map.get(key);
         if (favorites == null)
@@ -50,12 +48,12 @@ public class Stash<K>
      *            The type of the value.
      * @param key
      *            The key.
-     * @param ilkKey
+     * @param ilk
      *            The super type token of the value.
      * @param value
      *            The value.
      */
-    public <T> void put(K key, Ilk<T> ilk, T value)
+    public <T> void put(Key key, Ilk<T> ilk, T value)
     {
         put(key, ilk.key, value);
     }
@@ -72,7 +70,7 @@ public class Stash<K>
      * @param value
      *            The value.
      */
-    public <T> void put(K key, Class<T> typeClass, T value)
+    public <T> void put(Key key, Class<T> typeClass, T value)
     {
         put(key, new Ilk.Key(typeClass), value);
     }
@@ -87,7 +85,7 @@ public class Stash<K>
      *            The type token of the value.
      * @return The value or null if none exists in the container.
      */
-    private Object get(K key, Ilk.Key typeKey)
+    private Object get(Key key, Ilk.Key typeKey)
     {
         Map<Ilk.Key, Object> favorites = map.get(key);
         if (favorites == null)
@@ -107,7 +105,7 @@ public class Stash<K>
      *            The super type token of the value.
      * @return The value or null if none exists in the container.
      */
-    public <T> T get(K key, Ilk<T> ilk)
+    public <T> T get(Key key, Ilk<T> ilk)
     {
         return new UncheckedCast<T>().cast(get(key, ilk.key)); 
     }
@@ -121,8 +119,12 @@ public class Stash<K>
      *            The class of the type.
      * @return The value or null if none exists in the container.
      */
-    public <T> T get(K key, Class<T> typeClass)
+    public <T> T get(Key key, Class<T> typeClass)
     {
         return typeClass.cast(get(key, new Ilk.Key(typeClass)));
+    }
+    
+    public final static class Key
+    {
     }
 }

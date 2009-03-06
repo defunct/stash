@@ -15,13 +15,14 @@ public class StashTest
     @Test
     public void stash()
     {
-        Stash<Integer> stash = new Stash<Integer>();
-        stash.put(1, String.class, "Hello, World!");
-        assertEquals(stash.get(1, String.class), "Hello, World!");
+        Stash.Key key = new Stash.Key();
+        Stash stash = new Stash();
+        stash.put(key, String.class, "Hello, World!");
+        assertEquals(stash.get(key, String.class), "Hello, World!");
         
         List<String> strings = Arrays.asList("a", "b", "c");
-        stash.put(1, new Ilk<List<String>>() {}, strings);
-        strings = stash.get(1, new Ilk<List<String>>() { });
+        stash.put(key, new Ilk<List<String>>() {}, strings);
+        strings = stash.get(key, new Ilk<List<String>>() { });
         assertEquals(strings.get(0), "a");
     }
 }
