@@ -1,5 +1,6 @@
 package com.goodworkalan.stash;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +12,11 @@ import com.goodworkalan.ilk.UncheckedCast;
  * 
  * @author Alan Gutierrez
  */
-public class Stash
+public class Stash implements Serializable
 {
+    /** The serial version id. */
+    private static final long serialVersionUID = 1L;
+
     /** Map of keys to type mapped objects. */
     private final Map<Key, Map<Ilk.Key, Object>> map = new HashMap<Key, Map<Ilk.Key, Object>>();
 
@@ -123,9 +127,18 @@ public class Stash
     {
         return typeClass.cast(get(key, new Ilk.Key(typeClass)));
     }
-    
-    // TODO Document.
-    public final static class Key
+
+    /**
+     * The key type used to identify properties stored in the type-safe
+     * container. The key type uses identity equality and hash code. An item can
+     * only be retrieved from a stash with the same key instance that was used
+     * to add it.
+     * 
+     * @author Alan Gutierrez
+     */
+    public final static class Key implements Serializable
     {
+        /** The serial version id. */
+        private static final long serialVersionUID = 1L;
     }
 }
