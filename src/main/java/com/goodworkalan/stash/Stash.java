@@ -124,6 +124,7 @@ public class Stash
         return typeClass.cast(get(key, new Ilk.Key(typeClass)));
     }
     
+    // TODO Document.
     public final static class Key
     {
     }
