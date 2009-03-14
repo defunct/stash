@@ -18,6 +18,11 @@ public class Stash implements Serializable
 
     /** Map of keys to type mapped objects. */
     private final Map<Key, Ilk.Pair> map = new HashMap<Key, Ilk.Pair>();
+    
+    /** Create an empty type-safe heterogeneous collection. */
+    public Stash()
+    {
+    }
 
     /**
      * Map the given value of the type given by the <code>Ilk</code> super type
@@ -66,7 +71,7 @@ public class Stash implements Serializable
      */
     public <T> T get(Key key, Ilk<T> ilk)
     {
-        Ilk.Pair pair = map.get(ilk.key);
+        Ilk.Pair pair = map.get(key);
         if (pair == null)
         {
             return null;
@@ -100,5 +105,10 @@ public class Stash implements Serializable
     {
         /** The serial version id. */
         private static final long serialVersionUID = 1L;
+
+        /** Create a key. */
+        public Key()
+        {
+        }
     }
 }
