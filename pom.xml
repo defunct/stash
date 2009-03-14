@@ -9,7 +9,7 @@
     <version>0.1.X</version>
 
     <name>stash</name>
-    <description>A container keyed on Grafter's Gadget.</description>
+    <description>A type-safe heterogenous container keyed on super type tokens.</description>
 
     <organization>
         <name>Alan Gutierrez</name>
