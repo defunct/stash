@@ -2,9 +2,10 @@ STASH
 
 A type-safe heterogenous container keyed on super type tokens.
 
-    Issues and Tasks: http://blogometer.com/trac/incubator
-    Source: http://github.com/bigeasy/stash/tree/master
-    Contact: alan@blogometer.com
+    Source: http://github.com/bigeasy/stash
+    Wiki: http://wiki.github.com/bigeasy/stash
+
+    Issues: http://bigeasy.lighthouseapp.com/projects/44251-stash/
 
 PURPOSE
 
