@@ -7,21 +7,19 @@ import java.util.Map;
 import com.goodworkalan.ilk.Ilk;
 
 /**
- * A type-safe heterogeneous collection. 
+ * A type-safe heterogeneous collection.
  * 
  * @author Alan Gutierrez
  */
-public class Stash implements Serializable
-{
+public class Stash implements Serializable {
     /** The serial version id. */
     private static final long serialVersionUID = 1L;
 
     /** Map of keys to type mapped objects. */
     private final Map<Key, Ilk.Box> map = new HashMap<Key, Ilk.Box>();
-    
+
     /** Create an empty type-safe heterogeneous collection. */
-    public Stash()
-    {
+    public Stash() {
     }
 
     /**
@@ -37,11 +35,10 @@ public class Stash implements Serializable
      * @param value
      *            The value.
      */
-    public <T> void put(Key key, Ilk<T> ilk, T value)
-    {
+    public <T> void put(Key key, Ilk<T> ilk, T value) {
         map.put(key, ilk.box(value));
     }
-    
+
     /**
      * Map the given value of the type given by the class to the given key.
      * 
@@ -54,8 +51,7 @@ public class Stash implements Serializable
      * @param value
      *            The value.
      */
-    public <T> void put(Key key, Class<T> type, T value)
-    {
+    public <T> void put(Key key, Class<T> type, T value) {
         put(key, new Ilk<T>(type), value);
     }
 
@@ -69,11 +65,9 @@ public class Stash implements Serializable
      *            The super type token of the value.
      * @return The value or null if none exists in the container.
      */
-    public <T> T get(Key key, Ilk<T> ilk)
-    {
+    public <T> T get(Key key, Ilk<T> ilk) {
         Ilk.Box box = map.get(key);
-        if (box == null)
-        {
+        if (box == null) {
             return null;
         }
         return box.cast(ilk);
@@ -88,8 +82,7 @@ public class Stash implements Serializable
      *            The class of the type.
      * @return The value or null if none exists in the container.
      */
-    public <T> T get(Key key, Class<T> type)
-    {
+    public <T> T get(Key key, Class<T> type) {
         return get(key, new Ilk<T>(type));
     }
 
@@ -101,14 +94,12 @@ public class Stash implements Serializable
      * 
      * @author Alan Gutierrez
      */
-    public final static class Key implements Serializable
-    {
+    public final static class Key implements Serializable {
         /** The serial version id. */
         private static final long serialVersionUID = 1L;
 
         /** Create a key. */
-        public Key()
-        {
+        public Key() {
         }
     }
 }
