@@ -10,10 +10,10 @@ public class StashProject extends ProjectModule {
     public void build(Builder builder) {
         builder
             .cookbook(JavaProject.class)
-                .produces(new Artifact("com.goodworkalan/stash/0.1"))
+                .produces(new Artifact("com.github.bigeasy.stash/stash/0.1"))
                 .main()
                     .depends()
-                        .artifact(new Artifact("com.goodworkalan/ilk/0.1"))
+                        .artifact(new Artifact("com.github.bigeasy.ilk/ilk/0.1"))
                         .end()
                     .end()
                 .test()
