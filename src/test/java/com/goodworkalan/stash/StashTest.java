@@ -10,7 +10,13 @@ import org.testng.annotations.Test;
 
 import com.goodworkalan.ilk.Ilk;
 
+/**
+ * Unit tests for the {@link Stash} class.
+ *
+ * @author Alan Gutierrez
+ */
 public class StashTest {
+    /** Test stash. */
     @Test
     public void stash() {
         Stash.Key key = new Stash.Key();
